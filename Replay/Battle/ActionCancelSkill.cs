@@ -1,0 +1,22 @@
+namespace ArkReplay.Replay.Battle
+{
+    /// <summary>
+    /// Cancels a skill or targeting. Weird edge case because using ESC or right
+    /// click to cancel skills uses a slightly different routine.
+    /// </summary>
+    public class ActionCancelSkill : IAction
+    {
+        public ActionCancelSkill()
+        { }
+
+        public void Replay()
+        {
+            BattleSystem.instance.TargetSelectCancel();
+        }
+
+        public override string ToString()
+        {
+            return "Cancel skill selection";
+        }
+    }
+}
