@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using ArkReplay.Replay;
 using GameDataEditor;
 using Newtonsoft.Json;
@@ -198,6 +199,24 @@ namespace ArkReplay
         {
             _replaying = false;
             _record = null;
+        }
+
+        /// <summary>
+        /// Stops the replay like <see cref="StopReplay"/>, but also checks the
+        /// record for extraneous actions.
+        /// </summary>
+        public void FinishReplay()
+        {
+            StopReplay();
+
+            if (_actionCursor < _record.actions.Count)
+            {
+                Debug.LogWarning("ERROR: Replay finished, but actions remaining:");
+                foreach (Action action in _record.actions.Skip(_actionCursor))
+                {
+                    Debug.LogWarning(action);
+                }
+            }
         }
     }
 }

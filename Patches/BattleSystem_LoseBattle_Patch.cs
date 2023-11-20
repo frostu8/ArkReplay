@@ -8,11 +8,16 @@ namespace ArkReplay.Patches
     {
         static void Prefix(BattleSystem __instance)
         {
-            if (!RunRecorder.Recording) return;
-            RunRecorder recorder = RunRecorder.Instance;
-
-            // finish record
-            recorder.Save();
+            if (RunRecorder.Recording)
+            {
+                // finish record
+                RunRecorder.Instance.Save();
+            }
+            else if (RunReplayer.Replaying)
+            {
+                // finish replaying
+                RunReplayer.Instance.FinishReplay();
+            }
         }
     }
 }

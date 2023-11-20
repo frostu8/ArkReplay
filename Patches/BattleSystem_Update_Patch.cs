@@ -2,6 +2,8 @@ using ArkReplay.Replay.Battle;
 using HarmonyLib;
 using UnityEngine;
 
+#pragma warning disable IDE0051
+
 namespace ArkReplay.Patches
 {
     [HarmonyPatch(typeof(BattleSystem), "Update")]
@@ -25,3 +27,5 @@ namespace ArkReplay.Patches
         }
     }
 }
+
+#pragma warning restore IDE0051

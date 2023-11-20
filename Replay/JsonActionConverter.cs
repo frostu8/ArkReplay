@@ -25,6 +25,8 @@ namespace ArkReplay.Replay
             { "DrawUpgrade", typeof(ActionDrawUpgrade) },
             { "ApUpgrade", typeof(ActionApUpgrade) },
             { "ChangeFixedSkill", typeof(ActionChangeFixedSkill) },
+            { "NextCamp", typeof(ActionNextCamp) },
+            { "MoveStage", typeof(ActionMoveStage) },
         };
 
         public override bool CanConvert(Type objectType)

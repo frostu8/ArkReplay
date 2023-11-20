@@ -19,6 +19,9 @@
     <Reference Include="Assembly-CSharp" Private="false">
       <HintPath>".\lib\Assembly-CSharp.dll</HintPath>
     </Reference>
+    <Reference Include="Assembly-CSharp-firstpass" Private="false">
+      <HintPath>".\lib\Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI" Private="false">
       <HintPath>".\lib\UnityEngine.UI.dll</HintPath>
     </Reference>
