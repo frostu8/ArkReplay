@@ -59,7 +59,7 @@ namespace ArkReplay
 
             // create run replayer
             var runReplayer = new GameObject("RunReplayer");
-            runRecorder.AddComponent<RunReplayer>();
+            runReplayer.AddComponent<RunReplayer>();
             Object.DontDestroyOnLoad(runReplayer);
             
             OnModSettingUpdate();
