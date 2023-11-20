@@ -51,9 +51,8 @@ namespace ArkReplay
             }
         }
 
-        internal static void DestroyInstance()
+        void OnDestroy()
         {
-            UnityEngine.Object.Destroy(Instance.gameObject);
             Instance = null;
         }
 

@@ -18,13 +18,14 @@ namespace ArkReplay
         /// </summary>
         public static string ReplayDir { get; set; }
 
+        private GameObject monoBehaviorHooks;
+
         private Harmony harmony;
 
         public override void Dispose()
         {
             // destroy run recorder and replayer
-            RunRecorder.DestroyInstance();
-            RunReplayer.DestroyInstance();
+            Object.Destroy(monoBehaviorHooks);
 
             // undo patches
             harmony.UnpatchSelf();
@@ -52,16 +53,14 @@ namespace ArkReplay
             harmony = new Harmony(GUID);
             harmony.PatchAll();
 
-            // create run recorder
-            var runRecorder = new GameObject("RunRecorder");
-            runRecorder.AddComponent<RunRecorder>();
-            Object.DontDestroyOnLoad(runRecorder);
+            monoBehaviorHooks = new GameObject("ArkReplay");
+            Object.DontDestroyOnLoad(monoBehaviorHooks);
 
+            // create run recorder
+            monoBehaviorHooks.AddComponent<RunRecorder>();
             // create run replayer
-            var runReplayer = new GameObject("RunReplayer");
-            runReplayer.AddComponent<RunReplayer>();
-            Object.DontDestroyOnLoad(runReplayer);
-            
+            monoBehaviorHooks.AddComponent<RunReplayer>();
+
             OnModSettingUpdate();
         }
     }
