@@ -1,10 +1,16 @@
 using System.Linq;
+using ArkReplay.Patches;
 using GameDataEditor;
 
 namespace ArkReplay
 {
     public static class Extensions
     {
+        public static bool IsClear(this FieldSystem system)
+        {
+            return FieldSystem_ReversePatches.IsClear(system);
+        }
+
         public static bool CanAct(this BattleSystem system)
         {
             return !BattleSystem.instance.DelayWait

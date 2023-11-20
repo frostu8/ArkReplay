@@ -15,7 +15,8 @@ namespace ArkReplay.Replay
     {
         public void Replay()
         {
-            NextStage();
+            FieldSystem.instance.Playercontrol.enabled = false;
+            RunReplayer.Instance.StartCoroutine(NextStage());
         }
 
         public bool Ready()
@@ -28,7 +29,7 @@ namespace ArkReplay.Replay
             return "Move to next camp";
         }
 
-        private IEnumerable NextStage()
+        private static IEnumerator NextStage()
         {
             yield return UIManager.inst.StartCoroutine(UIManager.inst.FadeBlack_Out());
 			FieldSystem.instance.NextStage();

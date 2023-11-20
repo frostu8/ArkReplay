@@ -91,7 +91,7 @@ namespace ArkReplay
             // pop action
             _actionCursor++;
 
-            if (_record.actions.Count >= _actionCursor)
+            if (_record.actions.Count > _actionCursor)
             {
                 // reset steptimer
                 _stepTimer = _stepTime;
