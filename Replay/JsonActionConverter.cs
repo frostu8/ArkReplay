@@ -38,17 +38,17 @@ namespace ArkReplay.Replay
             object existingValue,
             JsonSerializer serializer)
         {
-            if (!reader.Read() || reader.TokenType != JsonToken.StartObject)
-                throw new JsonException("expected object");
+            if (reader.TokenType != JsonToken.StartObject)
+                throw new JsonException($"expected object, got {reader.TokenType}");
 
             if (!reader.Read() || reader.TokenType != JsonToken.PropertyName)
-                throw new JsonException("expected tagged field");
+                throw new JsonException($"expected tagged field, got {reader.TokenType}");
 
             // get action type name
             string name = (string) reader.Value;
 
             if (!actionTypes.ContainsKey(name))
-                throw new JsonException("expected valid action name");
+                throw new JsonException($"expected valid action name, got {name}");
 
             // get value (this is infallible)
             reader.Read();
@@ -56,6 +56,9 @@ namespace ArkReplay.Replay
             // deserialize
             IAction action = (IAction) serializer
                 .Deserialize(reader, actionTypes[name]);
+
+            // consume endobject token
+            reader.Read();
 
             return new Action(action);
         }

@@ -11,5 +11,14 @@ namespace ArkReplay.Replay
         /// Replays the action.
         /// </summary>
         public void Replay();
+
+        /// <summary>
+        /// This is called every update to check if the action is ready.
+        /// </summary>
+        /// <returns>
+        /// A boolean, <code>false</code> if the action is still waiting for
+        /// something to be available.
+        /// </returns>
+        public bool Ready();
     }
 }

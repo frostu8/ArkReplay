@@ -22,8 +22,6 @@ namespace ArkReplay.Replay
             if (SelectSkillList.ButtonList.Count <= 0)
                 throw new UnexpectedStateException("Skill selection is empty or unopened.");
 
-            Skill skill = SelectSkillList.ButtonList[buttonIndex];
-
             // find skill button
             var list = UIManager.NowActiveUI.gameObject.GetComponent<SelectSkillList>();
 
@@ -35,11 +33,7 @@ namespace ArkReplay.Replay
             {
                 if (button.index == buttonIndex)
                 {
-                    var skillButton = button.gameObject.GetComponent<SkillButtonMain>().SkillbuttonBig;
-
-                    if (skillButton.Myskill == skill)
-                        skillButton.Click();
-
+                    button.GetComponent<SkillButton>().Click();
                     return; // finished successfully
                 }
             }
@@ -49,6 +43,22 @@ namespace ArkReplay.Replay
                 + $"index {buttonIndex} but it is out of bounds or does not "
                 + "exist."
             );
+        }
+
+        public bool Ready()
+        {
+            // check if skill list is active
+            var activeUI = UIManager.NowActiveUI;
+
+            if (activeUI != null)
+            {
+                var list = activeUI.GetComponent<SelectSkillList>();
+                return list != null;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public override string ToString()

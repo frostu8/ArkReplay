@@ -1,11 +1,15 @@
+using Newtonsoft.Json;
+
 namespace ArkReplay.Replay
 {
     /// <summary>
     /// Use soulstones to upgrade a party member.
     /// </summary>
+    [JsonObject(MemberSerialization.OptIn)]
     public class ActionUpgradePartyMember : IAction
     {
-        private int memberIndex;
+        [JsonProperty("index")]
+        public int memberIndex;
 
         public ActionUpgradePartyMember(int memberIndex)
         {
@@ -19,6 +23,11 @@ namespace ArkReplay.Replay
             charStats.Init();
 
             charStats.CharInfos[memberIndex].Upgrade(false);
+        }
+
+        public bool Ready()
+        {
+            return Action.FieldReady();
         }
 
         public override string ToString()

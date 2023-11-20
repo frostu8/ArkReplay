@@ -26,6 +26,12 @@ namespace ArkReplay.Replay
 			PlayData.TSavedata.NowMaxMemberNum++;
         }
 
+        public bool Ready()
+        {
+            // this is always ready because it can happen at the Ark
+            return true;
+        }
+
         public override string ToString()
         {
             return $"Add party member \"{characterKey}\" at level {level}";

@@ -8,6 +8,11 @@ namespace ArkReplay.Replay
             charStats.DrawUpgrade();
         }
 
+        public bool Ready()
+        {
+            return Action.FieldReady();
+        }
+
         public override string ToString()
         {
             return $"Draw upgrade";

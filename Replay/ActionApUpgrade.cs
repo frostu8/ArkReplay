@@ -8,6 +8,11 @@ namespace ArkReplay.Replay
             charStats.MPUpgrade();
         }
 
+        public bool Ready()
+        {
+            return Action.FieldReady();
+        }
+
         public override string ToString()
         {
             return $"AP upgrade";

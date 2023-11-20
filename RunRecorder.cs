@@ -1,19 +1,17 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using ArkReplay.Replay;
 using ArkReplay.Replay.Battle;
 using GameDataEditor;
 using Newtonsoft.Json;
 using UnityEngine;
+using Action = ArkReplay.Replay.Action;
 
 namespace ArkReplay
 {
     /// <summary>
-    /// This class actually does all the heavy lifting.
-    /// <desc>
-    /// This class is attached to the <see cref="FieldSystem"/> GameObject when
-    /// a recorded run starts.
-    /// </desc>
+    /// Records runs.
     /// </summary>
     public class RunRecorder : MonoBehaviour
     {
@@ -37,12 +35,8 @@ namespace ArkReplay
 
         private bool _recording;
 
-        private RunRecord runRecord;
-
-        /// <summary>
-        /// The directory to store saved runs.
-        /// </summary>
-        public string OutDir { get; set; }
+        private RunInfo currentRunInfo;
+        private List<Action> currentRunActions;
 
         void Awake()
         {
@@ -66,12 +60,14 @@ namespace ArkReplay
         /// <summary>
         /// Begins recording a run.
         /// </summary>
-        /// <param name="seed">The seed that was created.</param>
-        public void Begin(int seed)
+        /// <param name="info">The info of the start.</param>
+        public void Begin(RunInfo info)
         {
             Debug.Log("ArkReplay start recording.");
             _recording = true;
-            runRecord = new RunRecord(seed);
+
+            currentRunInfo = info;
+            currentRunActions = new List<Action>();
         }
 
         /// <summary>
@@ -82,7 +78,7 @@ namespace ArkReplay
         {
             Debug.Log($"ArkReplay recorded: {action}");
 
-            runRecord.actions.Add(new Replay.Action(action));
+            currentRunActions.Add(new Replay.Action(action));
         }
 
         /// <summary>
@@ -100,13 +96,13 @@ namespace ArkReplay
         public string Save()
         {
             // make sure out dir exists
-            Directory.CreateDirectory(OutDir);
+            Directory.CreateDirectory(Plugin.ReplayDir);
 
             // generate filename
             var now = DateTime.Now;
             var filename = $"replay-{now.Year}-{now.Month}-{now.Day}-{now.Hour}"
                 + $"-{now.Minute}-{now.Second}.arkr";
-            var path = Path.Combine(OutDir, filename);
+            var path = Path.Combine(Plugin.ReplayDir, filename);
 
             Save(path);
 
@@ -122,6 +118,8 @@ namespace ArkReplay
             if (!_recording)
                 throw new InvalidOperationException("Attemmpting to save recording without recording.");
 
+            var runRecord = new RunRecord(currentRunInfo, currentRunActions);
+
             using FileStream stream = File.Open(path, FileMode.Create, FileAccess.Write, FileShare.None);
             using StreamWriter writer = new StreamWriter(stream);
 
@@ -132,7 +130,9 @@ namespace ArkReplay
 
             Debug.Log($"ArkReplay wrote replay to \"{path}\"!");
 
-            runRecord = null;
+            // clear actions to free unused memory
+            currentRunActions = null;
+
             _recording = false;
         }
 

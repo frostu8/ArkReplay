@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GameDataEditor;
 using Newtonsoft.Json;
 
 namespace ArkReplay.Replay
@@ -27,7 +28,22 @@ namespace ArkReplay.Replay
 
         public void Replay()
         {
-            throw new System.NotImplementedException();
+            // seed battle
+            BattleSeed.NextSeed = seed;
+
+            var queueData = new GDEEnemyQueueData(queueKey);
+            var mapKey = StageSystem.instance.StageData.BattleMap.Key;
+            FieldSystem.instance.BattleStart(
+                queueData,
+                mapKey,
+                NomalBattle: true,
+                Curse: isCursed
+            );
+        }
+
+        public bool Ready()
+        {
+            return Action.FieldReady();
         }
 
         public override string ToString()

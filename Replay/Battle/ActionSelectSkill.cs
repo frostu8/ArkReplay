@@ -26,6 +26,11 @@ namespace ArkReplay.Replay.Battle
             skill.MyButton.Click();
         }
 
+        public bool Ready()
+        {
+            return Action.BattleReady();
+        }
+
         public override string ToString()
         {
             return $"Select skill #{skillIndex}";

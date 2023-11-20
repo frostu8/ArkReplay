@@ -3,6 +3,7 @@ using ArkReplay.Replay;
 using ArkReplay.Replay.Battle;
 using GameDataEditor;
 using HarmonyLib;
+using UnityEngine;
 
 namespace ArkReplay.Patches
 {

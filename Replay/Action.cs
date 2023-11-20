@@ -15,5 +15,20 @@ namespace ArkReplay.Replay
         {
             this.action = action;
         }
+
+        internal static bool FieldReady()
+        {
+            return FieldSystem.instance.Playercontrol.enabled;
+        }
+
+        internal static bool BattleReady()
+        {
+            // battle actions can only happen in battle
+            if (BattleSystem.instance == null)
+                return false;
+
+            return !BattleSystem.instance.DelayWait
+                && BattleSystem.instance.ActWindow.On;
+        }
     }
 }

@@ -13,12 +13,18 @@ namespace ArkReplay
     {
         public const string GUID = "net.frostu8.ca.arkreplay";
 
+        /// <summary>
+        /// The directory to store saved runs.
+        /// </summary>
+        public static string ReplayDir { get; set; }
+
         private Harmony harmony;
 
         public override void Dispose()
         {
-            // destroy run recorder
+            // destroy run recorder and replayer
             RunRecorder.DestroyInstance();
+            RunReplayer.DestroyInstance();
 
             // undo patches
             harmony.UnpatchSelf();
@@ -38,7 +44,7 @@ namespace ArkReplay
                 info.SaveSetting();
             }
 
-            RunRecorder.Instance.OutDir = setting.Value;
+            ReplayDir = setting.Value;
         }
 
         public override void Initialize()
@@ -50,6 +56,11 @@ namespace ArkReplay
             var runRecorder = new GameObject("RunRecorder");
             runRecorder.AddComponent<RunRecorder>();
             Object.DontDestroyOnLoad(runRecorder);
+
+            // create run replayer
+            var runReplayer = new GameObject("RunReplayer");
+            runRecorder.AddComponent<RunReplayer>();
+            Object.DontDestroyOnLoad(runReplayer);
             
             OnModSettingUpdate();
         }

@@ -24,6 +24,11 @@ namespace ArkReplay.Replay.Battle
             }
         }
 
+        public bool Ready()
+        {
+            return Action.BattleReady();
+        }
+
         public override string ToString()
         {
             var hostile = ally ? "ally" : "enemy";

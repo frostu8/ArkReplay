@@ -21,6 +21,11 @@ namespace ArkReplay.Replay.Battle
             throw new NotImplementedException();
         }
 
+        public bool Ready()
+        {
+            return Action.BattleReady();
+        }
+
         public override string ToString()
         {
             return $"Select item @ index {inventoryIndex}";

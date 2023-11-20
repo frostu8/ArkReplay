@@ -7,7 +7,13 @@ namespace ArkReplay.Replay.Battle
 
         public void Replay()
         {
-            BattleSystem.instance.Wait();
+            var wait = BattleSystem.instance.ActWindow.WaitButton.GetComponent<WaitButton>();
+            wait.WaitAct();
+        }
+
+        public bool Ready()
+        {
+            return Action.BattleReady();
         }
 
         public override string ToString()

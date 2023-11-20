@@ -1,11 +1,14 @@
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace ArkReplay.Replay
 {
     public class ActionChangeFixedSkill : IAction
     {
-        private int partyIndex;
-        private int skillIndex;
+        [JsonProperty("party_index")]
+        public int partyIndex;
+        [JsonProperty("skill_index")]
+        public int skillIndex;
 
         public ActionChangeFixedSkill(int partyIndex, int skillIndex)
         {
@@ -39,6 +42,11 @@ namespace ArkReplay.Replay
             charStats.CharInfos[partyIndex].Init();
             charStats.ParamSkillNum.SetParameterValue("SkillNum", ally.Skills.Count.ToString());
 
+        }
+
+        public bool Ready()
+        {
+            return Action.FieldReady();
         }
 
         public override string ToString()

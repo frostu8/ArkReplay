@@ -10,6 +10,11 @@ namespace ArkReplay.Replay.Battle
             BattleSystem.instance.TurnEnd();
         }
 
+        public bool Ready()
+        {
+            return Action.BattleReady();
+        }
+
         public override string ToString()
         {
             return "Turn end";

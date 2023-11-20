@@ -19,6 +19,11 @@ namespace ArkReplay.Replay.Battle
             ally.MyBasicSkill.Click();
         }
 
+        public bool Ready()
+        {
+            return Action.BattleReady();
+        }
+
         public override string ToString()
         {
             return $"Select basic skill of ally #{basicSkillIndex}";

@@ -14,6 +14,11 @@ namespace ArkReplay.Replay.Battle
             BattleSystem.instance.TargetSelectCancel();
         }
 
+        public bool Ready()
+        {
+            return Action.BattleReady();
+        }
+
         public override string ToString()
         {
             return "Cancel skill selection";

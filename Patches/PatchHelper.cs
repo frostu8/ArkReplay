@@ -38,7 +38,8 @@ namespace ArkReplay.Patches
             for (int i = 0; i < objects.Count; i++)
             {
                 var go = objects[i];
-                var indexer = go.AddComponent<SelectSkillListIndex>();
+                var goButton = go.GetComponent<SkillButtonMain>().SkillbuttonBig;
+                var indexer = goButton.gameObject.AddComponent<SelectSkillListIndex>();
 
                 indexer.index = i;
             }

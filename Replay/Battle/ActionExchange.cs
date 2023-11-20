@@ -19,6 +19,11 @@ namespace ArkReplay.Replay.Battle
             skill.MyButton.ClickWaste();
         }
 
+        public bool Ready()
+        {
+            return Action.BattleReady();
+        }
+
         public override string ToString()
         {
             return $"Exchange skill #{skillIndex}";

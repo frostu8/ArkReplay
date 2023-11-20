@@ -11,15 +11,15 @@ namespace ArkReplay.Replay
     public class RunRecord
     {
         [JsonProperty]
-        public int seed;
+        public RunInfo info;
 
         [JsonProperty]
         public List<Action> actions;
 
-        public RunRecord(int seed)
+        public RunRecord(RunInfo info, List<Action> actions)
         {
-            this.seed = seed;
-            actions = new List<Action>();
+            this.info = info;
+            this.actions = actions;
         }
     }
 }
