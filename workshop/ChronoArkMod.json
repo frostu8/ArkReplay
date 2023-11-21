@@ -1,0 +1,35 @@
+{
+    "id": "net.frostu8.ca.arkreplay",
+    "Title": "ArkReplay",
+    "Author": "frostu8",
+    "Description": "Record and replay runs that save to light files.",
+    "Version": "1.0.0",
+    "Cover": "icon.png",
+    "ModSettingEntries": [
+        {
+            "SettingType": "InputFieldSetting",
+            "SettingKey": "OutDir",
+            "DisplayName": "Replay Folder",
+            "Description": "Where local replay files (.arkr) will be stored.",
+            "InitValue": ""
+        },
+        {
+            "SettingType": "DropdownSetting",
+            "SettingKey": "AlwaysRecord",
+            "DisplayName": "Record Runs",
+            "Description": "Record runs always/never.",
+            "InitValue": "Always",
+            "Options": ["Always", "Never"]
+        }
+    ],
+    "DefaultAssetBundlePath": "",
+    "Dependencies": [ ],
+    "NeedRestartWhenSettingChanged": false,
+    "NeedReloadAllWhenEnabled": false,
+    "NeedRestartWhenEnabled": false,
+    "Uploader": "frostu8",
+    "TagList": ["Modding Tools"],
+    "Visibility": "Public",
+    "ChangeNote": "",
+    "WorkShopId": ""
+}
