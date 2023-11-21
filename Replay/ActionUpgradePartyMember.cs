@@ -1,3 +1,4 @@
+using ArkReplay.Json;
 using Newtonsoft.Json;
 
 namespace ArkReplay.Replay
@@ -6,6 +7,7 @@ namespace ArkReplay.Replay
     /// Use soulstones to upgrade a party member.
     /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
+    [JsonTag(typeof(Action))]
     public class ActionUpgradePartyMember : IAction
     {
         [JsonProperty("index")]

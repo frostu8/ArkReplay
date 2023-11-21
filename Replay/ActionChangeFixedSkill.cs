@@ -1,8 +1,9 @@
 using Newtonsoft.Json;
-using UnityEngine;
+using ArkReplay.Json;
 
 namespace ArkReplay.Replay
 {
+    [JsonTag(typeof(Action))]
     public class ActionChangeFixedSkill : IAction
     {
         [JsonProperty("party_index")]

@@ -1,3 +1,4 @@
+using ArkReplay.Json;
 using ArkReplay.Patches;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -7,6 +8,7 @@ namespace ArkReplay.Replay
     /// <summary>
     /// Selects a skill from a select skill list.
     /// </summary>
+    [JsonTag(typeof(Action))]
     public class ActionSelectFromList : IAction
     {
         [JsonProperty("index")]

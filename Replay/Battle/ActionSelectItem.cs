@@ -1,4 +1,5 @@
 using System;
+using ArkReplay.Json;
 using Newtonsoft.Json;
 
 namespace ArkReplay.Replay.Battle
@@ -6,6 +7,7 @@ namespace ArkReplay.Replay.Battle
     /// <summary>
     /// Selects an item from the inventory.
     /// </summary>
+    [JsonTag(typeof(Action))]
     public class ActionSelectItem : IAction
     {
         [JsonProperty("index")]

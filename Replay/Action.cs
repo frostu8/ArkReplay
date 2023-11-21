@@ -1,19 +1,46 @@
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using ArkReplay.Json;
+using ArkReplay.Replay.Battle;
 using Newtonsoft.Json;
+using ReflectionExtensions;
 
 namespace ArkReplay.Replay
 {
     /// <summary>
     /// A serializable action.
     /// </summary>
-    [JsonObject(MemberSerialization.OptIn)]
-    [JsonConverter(typeof(JsonActionConverter))]
-    public class Action
+    [JsonConverter(typeof(JsonTaggedConverter))]
+    public class Action : IJsonTagged
     {
         public IAction action;
+
+        public Action()
+        { }
 
         public Action(IAction action)
         {
             this.action = action;
+        }
+
+        public void Replay() => this.action.Replay();
+
+        public bool Ready() => this.action.Ready();
+
+        public override string ToString()
+        {
+            return this.action?.ToString() ?? "action=null";
+        }
+
+        public void SetTagged(object value)
+        {
+            action = (IAction) value;
+        }
+
+        public object GetTagged()
+        {
+            return action;
         }
 
         internal static bool FieldReady()

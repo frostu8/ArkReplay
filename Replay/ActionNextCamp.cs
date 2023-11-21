@@ -1,4 +1,5 @@
 using System.Collections;
+using ArkReplay.Json;
 using Newtonsoft.Json;
 
 namespace ArkReplay.Replay
@@ -11,6 +12,7 @@ namespace ArkReplay.Replay
     /// </desc>
     /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
+    [JsonTag(typeof(Action))]
     public class ActionNextCamp : IAction
     {
         public void Replay()

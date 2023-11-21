@@ -1,3 +1,4 @@
+using ArkReplay.Json;
 using Newtonsoft.Json;
 
 namespace ArkReplay.Replay.Battle
@@ -9,6 +10,7 @@ namespace ArkReplay.Replay.Battle
     /// skill.
     /// </desc>
     /// </summary>
+    [JsonTag(typeof(Action))]
     public class ActionSelectSkill : IAction
     {
         [JsonProperty("index")]

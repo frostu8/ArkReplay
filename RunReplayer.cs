@@ -66,7 +66,7 @@ namespace ArkReplay
             var topAction = CurrentAction();
 
             // tick steptimer
-            if (_stepTimer > 0 && topAction.action.Ready())
+            if (_stepTimer > 0 && topAction.Ready())
                 _stepTimer -= Time.deltaTime;
 
             if (_stepTimer <= 0) MoveNextAction();
@@ -76,7 +76,7 @@ namespace ArkReplay
         {
             try
             {
-                var currentAction = CurrentAction().action;
+                var currentAction = CurrentAction();
                 Debug.Log($"ArkReplay replaying action: {currentAction}");
                 currentAction.Replay();
             }

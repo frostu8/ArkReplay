@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using ArkReplay.Json;
 using GameDataEditor;
 using Newtonsoft.Json;
 
 namespace ArkReplay.Replay
 {
+    [JsonTag(typeof(Action))]
     public class ActionAddPartyMember : IAction
     {
         [JsonProperty("key")]

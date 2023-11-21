@@ -5,6 +5,8 @@ using ChronoArkMod.ModData;
 using ChronoArkMod;
 using ChronoArkMod.ModData.Settings;
 using System.IO;
+using ArkReplay.Json;
+using System.Reflection;
 
 namespace ArkReplay
 {
@@ -60,6 +62,9 @@ namespace ArkReplay
             monoBehaviorHooks.AddComponent<RunRecorder>();
             // create run replayer
             monoBehaviorHooks.AddComponent<RunReplayer>();
+
+            // register json types
+            JsonTaggedConverter.RegisterAll(Assembly.GetExecutingAssembly());
 
             OnModSettingUpdate();
         }

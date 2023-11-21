@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ArkReplay.Json;
 using GameDataEditor;
 using Newtonsoft.Json;
 
@@ -8,6 +9,7 @@ namespace ArkReplay.Replay
     /// A single serializable battle record.
     /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
+    [JsonTag(typeof(Action))]
     public class ActionStartBattle : IAction
     {
         [JsonProperty]

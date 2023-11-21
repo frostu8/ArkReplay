@@ -1,5 +1,8 @@
+using ArkReplay.Json;
+
 namespace ArkReplay.Replay.Battle
 {
+    [JsonTag(typeof(Action))]
     public class ActionEndTurn : IAction
     {
         public ActionEndTurn()

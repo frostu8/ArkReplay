@@ -1,5 +1,8 @@
+using ArkReplay.Json;
+
 namespace ArkReplay.Replay
 {
+    [JsonTag(typeof(Action))]
     public class ActionDrawUpgrade : IAction
     {
         public void Replay()
