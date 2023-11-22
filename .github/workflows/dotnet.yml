@@ -1,0 +1,38 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: Build Mod
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore -c Release
+    - name: Build Mod Artifact
+      run: |
+        mkdir -p ~/output/ArkReplay
+        mkdir -p ~/output/ArkReplay/Assemblies
+        cp workshop/icon.png ~/output/ArkReplay
+        cp workshop/ChronoArkMod.json ~/output/ArkReplay
+        cp bin/Release/netstandard2.0/ArkReplay.dll ~/output/ArkReplay/Assemblies
+    - name: Archive Mod Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ArkReplayMod
+        path: ~/output/ArkReplay
