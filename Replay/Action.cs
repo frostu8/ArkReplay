@@ -43,6 +43,11 @@ namespace ArkReplay.Replay
             return action;
         }
 
+        internal static bool CampUIReady()
+        {
+            return CampSingleton.ActiveCamp.UIObject != null;
+        }
+
         internal static bool FieldReady()
         {
             return FieldSystem.instance.Playercontrol.enabled;
