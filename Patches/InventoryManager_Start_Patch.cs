@@ -8,7 +8,7 @@ namespace ArkReplay.Replay
         static void Prefix(InventoryManager __instance)
         {
             // add inventory hash
-            if (__instance.GetComponent<InventoryHash>() == null)
+            if (__instance != PartyInventory.InvenM && !(__instance is CharEquipInven))
                 __instance.gameObject.AddComponent<InventoryHash>();
         }
     }

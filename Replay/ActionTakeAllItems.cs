@@ -7,6 +7,7 @@ namespace ArkReplay.Replay
     [JsonObject(MemberSerialization.OptIn)]
     public class ActionTakeAllItems : IAction
     {
+        [JsonProperty]
         public InventoryRef inventory;
 
         public ActionTakeAllItems(InventoryRef inventory)
