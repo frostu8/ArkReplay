@@ -1,11 +1,17 @@
 using System.Linq;
 using ArkReplay.Patches;
+using ArkReplay.Replay;
 using GameDataEditor;
 
 namespace ArkReplay
 {
     public static class Extensions
     {
+        public static ItemObject GetItem(this ItemSlot slot)
+        {
+            return slot.transform.GetChild(0).GetComponent<ItemObject>();
+        }
+
         public static bool IsClear(this FieldSystem system)
         {
             return FieldSystem_ReversePatches.IsClear(system);

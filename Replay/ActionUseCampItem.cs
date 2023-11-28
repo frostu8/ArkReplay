@@ -23,10 +23,10 @@ namespace ArkReplay.Replay
             InventoryManager inv = UIManager.inst.PartyInven;
 
             // get slot
-            Transform slot = inv.Align.transform.GetChild(inventoryIndex);
+            ItemSlot slot = inv.Align.transform.GetChild(inventoryIndex).GetComponent<ItemSlot>();
 
             // get itemobject
-            ItemObject item = slot.GetChild(0).gameObject.GetComponent<ItemObject>();
+            ItemObject item = slot.GetItem();
 
             ReversePatch.UI_Camp_ItemUse(dummy, item);
         }

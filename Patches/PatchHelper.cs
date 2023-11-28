@@ -13,6 +13,18 @@ namespace ArkReplay.Patches
     /// </summary>
     public static class PatchHelper
     {
+        public static void RecordedToInventory(InventoryManager mgr)
+        {
+            if (RunRecorder.Recording)
+            {
+                var action = new ActionTakeAllItems(new InventoryRef(mgr));
+
+                RunRecorder.Instance.Record(action);
+            }
+
+            mgr.ToInventory();
+        }
+
         public static void RecordWait()
         {
             if (!RunRecorder.Recording) return;
